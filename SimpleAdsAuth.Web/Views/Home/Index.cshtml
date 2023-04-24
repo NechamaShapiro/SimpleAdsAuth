@@ -9,13 +9,19 @@
                 @{
                     var repo = new UserRepository(@"Data Source=.\sqlexpress;Initial Catalog=SimpleAdsAuth;Integrated Security=true;");
                     var thisUser = repo.GetUserById(ad.UserId);
+                    //var loggedInUserEmail = User.Identity.Name;
+                    //User loggedInUser;
+                    //if(loggedInUserEmail != null)
+                    //{
+                    //    loggedInUser = repo.GetByEmail(loggedInUserEmail);
+                    //} 
                 }
                 <h5>Listed by @thisUser.FirstName @thisUser.LastName</h5>
                 <h5>Listed on @ad.Date.ToLongDateString()</h5>
                 <h5>Phone Number: @ad.PhoneNumber</h5>
                 <h3>Details:</h3>
                 <p>@ad.Details</p>
-                @if (ad.UserId == thisUser.Id && User.Identity.IsAuthenticated)
+                @if (Model.LoggedInUser != null && ad.UserId == Model.LoggedInUser.Id)
                 {
                     <form method="post" action="/home/deletead">
                         <input type="hidden" name="id" value="@ad.Id">
