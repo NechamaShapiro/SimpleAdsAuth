@@ -9,12 +9,6 @@
                 @{
                     var repo = new UserRepository(@"Data Source=.\sqlexpress;Initial Catalog=SimpleAdsAuth;Integrated Security=true;");
                     var thisUser = repo.GetUserById(ad.UserId);
-                    //var loggedInUserEmail = User.Identity.Name;
-                    //User loggedInUser;
-                    //if(loggedInUserEmail != null)
-                    //{
-                    //    loggedInUser = repo.GetByEmail(loggedInUserEmail);
-                    //} 
                 }
                 <h5>Listed by @thisUser.FirstName @thisUser.LastName</h5>
                 <h5>Listed on @ad.Date.ToLongDateString()</h5>

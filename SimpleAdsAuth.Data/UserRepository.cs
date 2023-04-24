@@ -103,6 +103,7 @@ namespace SimpleAdsAuth.Data
                 myAds.Add(new Ad
                 {
                     Id = (int)reader["Id"],
+                    UserId = (int)reader["UserId"],
                     Date = (DateTime)reader["Date"],
                     PhoneNumber = (string)reader["PhoneNumber"],
                     Details = (string)reader["Details"]

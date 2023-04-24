@@ -20,7 +20,10 @@ namespace SimpleAdsAuth.Web.Controllers
             var vm = new HomePageViewModel();
             vm.Ads = repo.GetAllAds();
             var currentUserEmail = User.Identity.Name;
-            vm.LoggedInUser = repo.GetByEmail(currentUserEmail);
+            if(currentUserEmail != null)
+            {
+                vm.LoggedInUser = repo.GetByEmail(currentUserEmail);
+            }
             return View(vm);
         }
         public IActionResult MyAccount()
