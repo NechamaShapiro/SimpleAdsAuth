@@ -93,10 +93,6 @@ namespace SimpleAdsAuth.Data
             cmd.Parameters.AddWithValue("@userId", userId);
             connection.Open();
             var reader = cmd.ExecuteReader();
-            if (!reader.Read())
-            {
-                return null;
-            }
             List<Ad> myAds = new List<Ad>();
             while (reader.Read())
             {
