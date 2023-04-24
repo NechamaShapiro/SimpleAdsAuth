@@ -1,0 +1,28 @@
+﻿@using SimpleAdsAuth.Data;
+@model HomePageViewModel
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        @foreach (var ad in Model.Ads)
+        {
+            <div class="bg-light p-4 rounded shadow mb-3">
+                @{
+                    var repo = new UserRepository(@"Data Source=.\sqlexpress;Initial Catalog=SimpleAdsAuth;Integrated Security=true;");
+                    var thisUser = repo.GetUserById(ad.UserId);
+                }
+                <h5>Listed by @thisUser.FirstName @thisUser.LastName</h5>
+                <h5>Listed on @ad.Date.ToLongDateString()</h5>
+                <h5>Phone Number: @ad.PhoneNumber</h5>
+                <h3>Details:</h3>
+                <p>@ad.Details</p>
+                @if (ad.UserId == thisUser.Id && User.Identity.IsAuthenticated)
+                {
+                    <form method="post" action="/home/deletead">
+                        <input type="hidden" name="id" value="@ad.Id">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                }
+            </div>
+        }
+    </div>
+</div>
