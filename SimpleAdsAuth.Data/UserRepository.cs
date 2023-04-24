@@ -100,6 +100,7 @@ namespace SimpleAdsAuth.Data
                 {
                     Id = (int)reader["Id"],
                     UserId = (int)reader["UserId"],
+                    UserName = (string)reader["UserName"],
                     Date = (DateTime)reader["Date"],
                     PhoneNumber = (string)reader["PhoneNumber"],
                     Details = (string)reader["Details"]
@@ -121,6 +122,7 @@ namespace SimpleAdsAuth.Data
                 {
                     Id = (int)reader["Id"],
                     UserId = (int)reader["UserId"],
+                    UserName = (string)reader["UserName"],
                     Date = (DateTime)reader["Date"],
                     PhoneNumber = (string)reader["PhoneNumber"],
                     Details = (string)reader["Details"]
@@ -129,13 +131,14 @@ namespace SimpleAdsAuth.Data
             connection.Close();
             return ads;
         }
-        public void AddNewAd(int userId, string phoneNumber, string details)
+        public void AddNewAd(int userId, string userName, string phoneNumber, string details)
         {
             using var connection = new SqlConnection(_connectionString);
             using var cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO Ads " +
-                "VALUES (@userId, GETDATE(), @phoneNumber, @details)";
+                "VALUES (@userId, @userName, GETDATE(), @phoneNumber, @details)";
             cmd.Parameters.AddWithValue("@userId", userId);
+            cmd.Parameters.AddWithValue("@userName", userName);
             cmd.Parameters.AddWithValue("@phoneNumber", phoneNumber);
             cmd.Parameters.AddWithValue("@details", details);
             connection.Open();

@@ -6,11 +6,7 @@
         @foreach (var ad in Model.Ads)
         {
             <div class="bg-light p-4 rounded shadow mb-3">
-                @{
-                    var repo = new UserRepository(@"Data Source=.\sqlexpress;Initial Catalog=SimpleAdsAuth;Integrated Security=true;");
-                    var thisUser = repo.GetUserById(ad.UserId);
-                }
-                <h5>Listed by @thisUser.FirstName @thisUser.LastName</h5>
+                <h5>Listed by @ad.UserName</h5>
                 <h5>Listed on @ad.Date.ToLongDateString()</h5>
                 <h5>Phone Number: @ad.PhoneNumber</h5>
                 <h3>Details:</h3>

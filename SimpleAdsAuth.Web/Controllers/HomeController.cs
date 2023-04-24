@@ -47,7 +47,10 @@ namespace SimpleAdsAuth.Web.Controllers
             var repo = new UserRepository(_connectionString);
             var currentUserEmail = User.Identity.Name;
             var user = repo.GetByEmail(currentUserEmail);
-            repo.AddNewAd(user.Id, phoneNumber, details);
+            string firstName = user.FirstName;
+            string lastName = user.LastName;
+            string name = firstName + " " + lastName;
+            repo.AddNewAd(user.Id, name, phoneNumber, details);
             return Redirect("/home/index");
         }
         public IActionResult DeleteAd(int id)
